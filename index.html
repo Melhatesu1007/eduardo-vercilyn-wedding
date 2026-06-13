@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Eduardo & Vercilyn Wedding</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+
+:root{
+    --blue1:#EAF4FB;
+    --blue2:#D9EAF7;
+    --blue3:#C7DFF1;
+    --text:#4B5563;
+    --white:#ffffff;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--blue1);
+    color:var(--text);
+    font-family:'Montserrat',sans-serif;
+}
+
+/* HERO SECTION */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:30px;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    background:rgba(255,255,255,.5);
+    border-radius:50%;
+    top:-100px;
+    right:-100px;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    width:250px;
+    height:250px;
+    background:rgba(255,255,255,.4);
+    border-radius:50%;
+    bottom:-80px;
+    left:-80px;
+}
+
+.date{
+    letter-spacing:4px;
+    margin-bottom:20px;
+    font-size:.85rem;
+}
+
+.names{
+    font-family:'Cormorant Garamond',serif;
+    font-size:4rem;
+    line-height:1;
+    color:#334155;
+}
+
+.and{
+    margin:10px 0;
+    font-size:1.3rem;
+}
+
+.tagline{
+    margin-top:20px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-size:.8rem;
+}
+
+/* COUNTDOWN */
+
+.countdown{
+    display:flex;
+    gap:10px;
+    margin-top:40px;
+}
+
+.box{
+    background:rgba(255,255,255,.35);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,.5);
+    padding:15px;
+    border-radius:20px;
+    width:75px;
+    text-align:center;
+}
+
+.box h2{
+    font-size:1.8rem;
+}
+
+.box span{
+    font-size:.7rem;
+}
+
+/* GLASS NAVIGATION CARD MENUS */
+
+.menu{
+    padding:25px;
+}
+
+.card{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    color:#334155;
+    margin:15px 0;
+    height:70px;
+    cursor:pointer;
+
+    background:rgba(255,255,255,.35);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+    border:1px solid rgba(255,255,255,.5);
+
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+    transition: transform 0.2s;
+}
+
+.card:hover{
+    transform:translateY(-3px);
+}
+
+/* BASE SECTIONS CONTAINER */
+
+section{
+    padding:40px 20px;
+}
+
+.title{
+    text-align:center;
+    font-family:'Cormorant Garamond',serif;
+    font-size:2.2rem;
+    margin-bottom:25px;
+}
+
+/* MASONRY LIVE GRID GALLERY */
+
+.gallery{
+    column-count:2;
+    column-gap:12px;
+}
+
+.gallery-item {
+    margin-bottom:15px;
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 18px;
+    overflow: hidden;
+    padding-bottom: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    display: inline-block;
+    width: 100%;
+}
+
+.gallery-item img{
+    width:100%;
+    display: block;
+    margin-bottom:8px;
+    border-radius:18px 18px 0 0;
+}
+
+.gallery-caption {
+    font-size: 0.8rem;
+    padding: 0 10px;
+    color: #4b5563;
+    text-align: center;
+    font-style: italic;
+    word-break: break-word;
+    line-height: 1.3;
+}
+
+/* FLOATING LIKE BUTTON */
+
+.like-btn{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+
+    width:60px;
+    height:60px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#ffffff;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+    font-size:24px;
+    cursor:pointer;
+    z-index: 99;
+}
+
+/* QR SCANNERS DISPLAYS */
+
+.qr-card{
+    background:white;
+    border-radius:25px;
+    text-align:center;
+    padding:30px;
+    box-shadow:0 8px 20px rgba(0,0,0,.03);
+}
+
+/* OVERLAY MODAL FORM POPUPS */
+
+.modal {
+    display: none; 
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 25px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.file-input-label {
+    display: block;
+    background: var(--blue2);
+    padding: 12px;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+#fileInput { display: none; }
+
+.caption-input {
+    width: 100%; 
+    padding: 12px; 
+    margin-bottom: 15px; 
+    border: 1px solid rgba(0,0,0,0.15); 
+    border-radius: 12px; 
+    font-family: inherit;
+    outline: none;
+    color: var(--text);
+}
+
+.caption-input:focus {
+    border-color: #64748b;
+}
+
+.btn-submit {
+    background: #334155;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 600;
+}
+
+.btn-close {
+    margin-top: 10px;
+    background: transparent;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+/* FOOTER MARGINS */
+
+footer{
+    padding:40px;
+    text-align:center;
+    color:#64748B;
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+
+    <div class="date">
+        SATURDAY • JUNE 27, 2026
+    </div>
+
+    <h1 class="names">
+        Eduardo
+    </h1>
+
+    <div class="and">&</div>
+
+    <h1 class="names">
+        Vercilyn
+    </h1>
+
+    <p class="tagline">
+        Share Your Wedding Moments
+    </p>
+
+    <div class="countdown">
+
+        <div class="box">
+            <h2 id="days">00</h2>
+            <span>DAYS</span>
+        </div>
+
+        <div class="box">
+            <h2 id="hours">00</h2>
+            <span>HOURS</span>
+        </div>
+
+        <div class="box">
+            <h2 id="minutes">00</h2>
+            <span>MINUTES</span>
+        </div>
+
+        <div class="box">
+            <h2 id="seconds">00</h2>
+            <span>SECONDS</span>
+        </div>
+
+    </div>
+
+</section>
+
+<div class="menu">
+
+    <div id="triggerUpload" class="card">
+        📸 Upload Memories
+    </div>
+
+    <a href="#gallery" class="card">
+        🖼 View Gallery
+    </a>
+
+    <a href="#guestbook" class="card">
+        💌 Guestbook
+    </a>
+
+    <a href="#timeline" class="card">
+        📍 Timeline
+    </a>
+
+</div>
+
+<div class="modal" id="uploadModal">
+    <div class="modal-content">
+        <h3 class="modal-title">Upload Photo</h3>
+        <label for="fileInput" class="file-input-label" id="fileLabel">Choose Image File</label>
+        <input type="file" id="fileInput" accept="image/*">
+        
+        <input type="text" id="photoCaption" class="caption-input" placeholder="Write a greeting or caption...">
+        
+        <button class="btn-submit" id="uploadBtn">Upload to Gallery</button>
+        <button class="btn-close" id="closeModal">Cancel</button>
+    </div>
+</div>
+
+<section id="gallery">
+
+    <h2 class="title">
+        Shared Moments
+    </h2>
+
+    <div class="gallery" id="imageGallery">
+        </div>
+
+</section>
+
+<section>
+
+    <h2 class="title">
+        Scan To Share Photos
+    </h2>
+
+    <div class="qr-card">
+
+        <div id="qrcode" style="display: flex; justify-content: center; margin-bottom: 20px;"></div>
+
+        <p>
+            Scan the QR code and upload your
+            wedding memories instantly.
+        </p>
+
+    </div>
+
+</section>
+
+<footer>
+
+    Eduardo & Vercilyn
+
+    <br><br>
+
+    June 27, 2026
+
+</footer>
+
+<button class="like-btn">
+❤️
+</button>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getFirestore, collection, addDoc, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+// 1. PASTE YOUR EXACT FIREBASE CONFIGURATION OBJECT HERE:
+const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_AUTH_DOMAIN",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_STORAGE_BUCKET",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId: "YOUR_APP_ID"
+};
+
+// Initialize Instance Connections
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const galleryCollection = collection(db, "gallery");
+
+// DOM References Elements Handles
+const uploadModal = document.getElementById("uploadModal");
+const triggerUpload = document.getElementById("triggerUpload");
+const closeModal = document.getElementById("closeModal");
+const fileInput = document.getElementById("fileInput");
+const fileLabel = document.getElementById("fileLabel");
+const photoCaption = document.getElementById("photoCaption");
+const uploadBtn = document.getElementById("uploadBtn");
+const imageGallery = document.getElementById("imageGallery");
+
+// Toggle Event Control Hooks
+triggerUpload.addEventListener("click", () => uploadModal.style.display = "flex");
+closeModal.addEventListener("click", () => {
+    uploadModal.style.display = "none";
+    fileInput.value = "";
+    photoCaption.value = "";
+    fileLabel.innerText = "Choose Image File";
+});
+
+fileInput.addEventListener("change", (e) => {
+    if(e.target.files[0]) fileLabel.innerText = e.target.files[0].name;
+});
+
+// Capture Processing Filters Pipeline
+uploadBtn.addEventListener("click", async () => {
+    const file = fileInput.files[0];
+    if (!file) return alert("Please select an image first.");
+
+    uploadBtn.innerText = "Compressing & Uploading...";
+    uploadBtn.disabled = true;
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function (event) {
+        const img = new Image();
+        img.src = event.target.result;
+        img.onload = async function () {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+
+            // Structural constraint filters to optimize base64 string storage payloads
+            const MAX_WIDTH = 800;
+            const MAX_HEIGHT = 800;
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+                if (width > MAX_WIDTH) {
+                    height *= MAX_WIDTH / width;
+                    width = MAX_WIDTH;
+                }
+            } else {
+                if (height > MAX_HEIGHT) {
+                    width *= MAX_HEIGHT / height;
+                    height = MAX_HEIGHT;
+                }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            ctx.drawImage(img, 0, 0, width, height);
+
+            // Compress to raw matrix payload string format
+            const base64String = canvas.toDataURL("image/jpeg", 0.6);
+
+            try {
+                // Upload records structural document directly onto collection stream
+                await addDoc(galleryCollection, {
+                    imageData: base64String,
+                    caption: photoCaption.value.trim() || "",
+                    timestamp: new Date().getTime()
+                });
+                
+                uploadModal.style.display = "none";
+                fileInput.value = "";
+                photoCaption.value = "";
+                fileLabel.innerText = "Choose Image File";
+            } catch (error) {
+                console.error("Firestore Upload Error: ", error);
+                alert("Upload failed to connect to database stream.");
+            } finally {
+                uploadBtn.innerText = "Upload to Gallery";
+                uploadBtn.disabled = false;
+            }
+        };
+    };
+});
+
+// Dynamic Pipeline Watch Sync Listener
+const galleryQuery = query(galleryCollection, orderBy("timestamp", "desc"));
+onSnapshot(galleryQuery, (snapshot) => {
+    imageGallery.innerHTML = "";
+    snapshot.forEach((doc) => {
+        const data = doc.data();
+        
+        // Assemble structural items layout template cards wrapper
+        const itemContainer = document.createElement("div");
+        itemContainer.className = "gallery-item";
+
+        const imgElement = document.createElement("img");
+        imgElement.src = data.imageData;
+        imgElement.alt = "Wedding Memory";
+        itemContainer.appendChild(imgElement);
+
+        // Inject elements tracking greeting values text strings if present
+        if (data.caption) {
+            const captionElement = document.createElement("div");
+            captionElement.className = "gallery-caption";
+            captionElement.innerText = data.caption;
+            itemContainer.appendChild(captionElement);
+        }
+
+        imageGallery.appendChild(itemContainer);
+    });
+});
+</script>
+
+<script>
+const weddingDate = new Date("June 27, 2026 14:00:00").getTime();
+
+setInterval(()=>{
+    let now = new Date().getTime();
+    let distance = weddingDate - now;
+
+    let days = Math.floor(distance/(1000*60*60*24));
+    let hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+    let minutes = Math.floor((distance%(1000*60))/(1000*60));
+    let seconds = Math.floor((distance%(1000*60))/1000);
+
+    document.getElementById("days").innerHTML = days < 0 ? "00" : days;
+    document.getElementById("hours").innerHTML = hours < 0 ? "00" : hours;
+    document.getElementById("minutes").innerHTML = minutes < 0 ? "00" : minutes;
+    document.getElementById("seconds").innerHTML = seconds < 0 ? "00" : seconds;
+},1000);
+
+// Auto-generates high-definition QR layouts identifying client deployment links path domains
+window.addEventListener("DOMContentLoaded", () => {
+    new QRCode(document.getElementById("qrcode"), {
+        text: window.location.href, 
+        width: 180,
+        height: 180,
+        colorDark : "#334155", 
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+});
+</script>
+
+</body>
+</html>
